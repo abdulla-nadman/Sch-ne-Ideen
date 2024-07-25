@@ -49,3 +49,19 @@ button:hover {
     color: red;
     margin-top: 10px;
 }
+
+.links {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.links a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.cta-banner {
+    background: linear-gradient(90deg, #000 0%, #555 100%);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 20px;
+}
+.cta-banner h2 {
+    margin: 0;
+    font-size: 1.8em;
+    animation: fadeIn 2s ease-in-out;
+}
+.cta-banner p {
+    font-size: 1.2em;
+    margin: 10px 0;
+    animation: fadeIn 2s ease-in-out 1s;
+    opacity: 0;
+}
+.cta-banner button {
+    background-color: #f39c12;
+    border: none;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    animation: fadeIn 2s ease-in-out 2s;
+    opacity: 0;
+}
+.cta-banner button:hover {
+    background-color: #e67e22;
+}
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://cdn.pixabay.com/photo/2017/07/12/10/14/abstract-2495737_960_720.jpg') repeat;
+    opacity: 0.1;
+    animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 0.1; }
+}

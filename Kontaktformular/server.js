@@ -1,20 +1,21 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 const port = 3000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // E-Mail-Konfiguration
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'your-email@gmail.com', // Ersetzen Sie dies mit Ihrer E-Mail-Adresse
-        pass: 'your-email-password'   // Ersetzen Sie dies mit Ihrem E-Mail-Passwort
+        user: 'abdulla.nadman@gmail.com', // Ersetzen Sie dies mit Ihrer E-Mail-Adresse
+        pass: 'Moon1234m'   // Ersetzen Sie dies mit Ihrem E-Mail-Passwort
     }
 });
 
@@ -24,7 +25,7 @@ app.post('/send-email', (req, res) => {
 
     const mailOptions = {
         from: email,
-        to: 'your-email@gmail.com', // Ihre E-Mail-Adresse
+        to: 'abdulla.nadman@gmail.com', // Ihre E-Mail-Adresse
         subject: 'Neue Kontaktformularnachricht',
         text: `Name: ${name}\nE-Mail: ${email}\nNachricht: ${message}`
     };

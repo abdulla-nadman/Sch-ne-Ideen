@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel GefÑllt mir</title>
+    <style>
+        .heart-button {
+            font-size: 2em;
+            color: red;
+            cursor: pointer;
+            border: none;
+            background: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        html, body, canvas {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #191919;
+        }
+        #products, #likedItems {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="backgroundCanvas"></canvas>
+   
+    <div id="likedItems" style="display: none;">
+        <h2>GefÑllt mir</h2>
+        <ul id="likedItemsList"></ul>
+        <button onclick="hideLikedItems()">ZurÅck</button>
+    </div>
+    <script>
+        async function likeItem(item) {
+            const response = await fetch('/like', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function showLikedItems() {
+            const response = await fetch('/likes');
+            const items = await response.json();
+            const likedItemsList = document.getElementById('likedItemsList');
+            likedItemsList.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                likedItemsList.appendChild(li);
+            });
+            document.getElementById('products').style.display = 'none';
+            document.getElementById('likedItems').style.display = 'block';
+        }
+
+        function hideLikedItems() {
+            document.getElementById('likedItems').style.display = 'none';
+            document.getElementById('products').style.display = 'block';
+        }
+
+        // 3D background script with planets and stars
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        const particleCount = 100;
+        const planetCount = 5;
+        const planets = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.z = Math.random() * canvas.width;
+                this.o = Math.random() * 1;
+            }
+            update() {
+                this.z -= 1;
+                if (this.z <= 0) {
+                    this.z = canvas.width;
+                }
+            }
+            show() {
+                const sx = (this.x - canvas.width / 2) * (canvas.width / this.z);
+                const sy = (this.y - canvas.height / 2) * (canvas.width / this.z);
+                const size = canvas.width / this.z;
+                ctx.beginPath();
+                ctx.arc(sx + canvas.width / 2, sy + canvas.height / 2, size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.o})`;
+                ctx.fill();
+            }
+        }
+
+        class Planet {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 30 + 20;
+                this.color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+            }
+            update() {
+                this.y += 0.5;
+                if (this.y > canvas.height) {
+                    this.y = -this.radius;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            show() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function setup() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            for (let i = 0; i < planetCount; i++) {
+                planets.push(new Planet());
+            }
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.show();
+            });
+            planets.forEach(p => {
+                p.update();
+                p.show();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        setup();
+        draw();
+    </script>
+</body>
+</html>

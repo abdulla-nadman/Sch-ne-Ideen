@@ -1,0 +1,58 @@
+body {
+    transition: background-color 0.3s, color 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#toggleButton {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    background-color: #007bff;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    transition: background-color 0.3s;
+    font-size: 24px; /* Gr”áe der Symbole erh”hen */
+}
+
+#toggleButton .sun, #toggleButton .moon {
+    transition: transform 0.3s;
+}
+
+body.light-mode #toggleButton .sun {
+    transform: translateX(0);
+}
+
+body.light-mode #toggleButton .moon {
+    transform: translateX(100%);
+}
+
+body.dark-mode #toggleButton .sun {
+    transform: translateX(-100%);
+}
+
+body.dark-mode #toggleButton .moon {
+    transform: translateX(0);
+}

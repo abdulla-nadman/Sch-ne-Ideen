@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Examples</title>
+    <style>
+        .button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .primary-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        .secondary-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+        .success-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        .danger-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+        .warning-button {
+            background-color: #ffc107;
+            color: black;
+            border: none;
+        }
+        .info-button {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+        }
+        .light-button {
+            background-color: #f8f9fa;
+            color: black;
+            border: 1px solid #ced4da;
+        }
+        .dark-button {
+            background-color: #343a40;
+            color: white;
+            border: none;
+        }
+        .heart-button {
+            font-size: 24px;
+            color: red;
+            background: none;
+            border: none;
+        }
+    </style>
+    <script>
+        function showAlert(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+    <h1>Button Examples</h1>
+    <button class="button primary-button" onclick="showAlert('Primary Button Clicked')">Primary</button>
+    <button class="button secondary-button" onclick="showAlert('Secondary Button Clicked')">Secondary</button>
+    <button class="button success-button" onclick="showAlert('Success Button Clicked')">Success</button>
+    <button class="button danger-button" onclick="showAlert('Danger Button Clicked')">Danger</button>
+    <button class="button warning-button" onclick="showAlert('Warning Button Clicked')">Warning</button>
+    <button class="button info-button" onclick="showAlert('Info Button Clicked')">Info</button>
+    <button class="button light-button" onclick="showAlert('Light Button Clicked')">Light</button>
+    <button class="button dark-button" onclick="showAlert('Dark Button Clicked')">Dark</button>
+    <button class="heart-button" onclick="showAlert('Heart Button Clicked')">&#10084;</button>
+</body>
+</html>

@@ -1,20 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const likedProductsList = document.getElementById('liked-products');
-    const likeButtons = document.querySelectorAll('.like-button');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-    likeButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const product = event.target.closest('.product');
-            const productId = product.dataset.id;
-            const productName = product.querySelector('h2').textContent;
+const app = express();
+app.use(bodyParser.json());
 
-            // šberprfen, ob das Produkt bereits in der Liste ist
-            if (![...likedProductsList.children].some(item => item.dataset.id === productId)) {
-                const listItem = document.createElement('li');
-                listItem.textContent = productName;
-                listItem.dataset.id = productId;
-                likedProductsList.appendChild(listItem);
-            }
-        });
-    });
+let likedItems = [];
+
+app.post('/like', (req, res) => {
+    const { item } = req.body;
+    if (!likedItems.includes(item)) {
+        likedItems.push(item);
+    }
+    res.json({ message: `${item} wurde zur Gef„llt mir Liste hinzugefgt.` });
+});
+
+app.get('/likes', (req, res) => {
+    res.json(likedItems);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server l„uft auf http://localhost:${PORT}`);
 });

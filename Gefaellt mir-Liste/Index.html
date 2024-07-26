@@ -3,31 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GefÑllt mir Liste</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Artikel GefÑllt mir</title>
+    <style>
+        .heart-button {
+            font-size: 2em;
+            color: red;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Produkte</h1>
-    <div id="product-list">
-        <div class="product" data-id="1">
-            <h2>Produkt 1</h2>
-            <button class="like-button">GefÑllt mir</button>
-        </div>
-        <div class="product" data-id="2">
-            <h2>Produkt 2</h2>
-            <button class="like-button">GefÑllt mir</button>
-        </div>
-        <div class="product" data-id="3">
-            <h2>Produkt 3</h2>
-            <button class="like-button">GefÑllt mir</button>
-        </div>
+    <button class="heart-button" onclick="showLikedItems()">??</button>
+    <div id="products">
+        <h2>Produkte</h2>
+        <ul>
+            <li>Produkt 1 <button onclick="likeItem('Produkt 1')">GefÑllt mir</button></li>
+            <li>Produkt 2 <button onclick="likeItem('Produkt 2')">GefÑllt mir</button></li>
+            <li>Produkt 3 <button onclick="likeItem('Produkt 3')">GefÑllt mir</button></li>
+        </ul>
     </div>
+    <div id="likedItems" style="display: none;">
+        <h2>GefÑllt mir</h2>
+        <ul id="likedItemsList"></ul>
+        <button onclick="hideLikedItems()">ZurÅck</button>
+    </div>
+    <script>
+        async function likeItem(item) {
+            const response = await fetch('/like', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
 
-    <h2>Meine GefÑllt mir Liste</h2>
-    <ul id="liked-products">
-        <!-- GefÑllt mir Produkte werden hier angezeigt -->
-    </ul>
+        async function showLikedItems() {
+            const response = await fetch('/likes');
+            const items = await response.json();
+            const likedItemsList = document.getElementById('likedItemsList');
+            likedItemsList.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                likedItemsList.appendChild(li);
+            });
+            document.getElementById('products').style.display = 'none';
+            document.getElementById('likedItems').style.display = 'block';
+        }
 
-    <script src="script.js"></script>
+        function hideLikedItems() {
+            document.getElementById('likedItems').style.display = 'none';
+            document.getElementById('products').style.display = 'block';
+        }
+    </script>
+        <script src="Script.js"></script>
+
 </body>
 </html>

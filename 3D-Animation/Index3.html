@@ -4,48 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3D Scroll Animation</title>
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
-    overflow-x: hidden;
-  }
-  .carousel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 300px;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: spin 60s infinite linear;
-    transform: rotateX(20deg); /* Hier wird das Karussell gekippt */
-  }
-  .product {
-    position: absolute;
-    width: 200px;
-    height: 300px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-  }
-  @keyframes spin {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(360deg);
-    }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
+
+
 </head>
 <body>
-  <div class="carousel">
+  <div class="carousel" id="carousel">
     <div class="product" style="transform: rotateY(0deg) translateZ(400px);">Product 1</div>
     <div class="product" style="transform: rotateY(45deg) translateZ(400px);">Product 2</div>
     <div class="product" style="transform: rotateY(90deg) translateZ(400px);">Product 3</div>
@@ -56,5 +20,9 @@
     <div class="product" style="transform: rotateY(315deg) translateZ(400px);">Product 8</div>
     <!-- Weitere Produkte hier hinzufgen -->
   </div>
+  <script src="Script.js"></script>
+
+
+ 
 </body>
 </html>
